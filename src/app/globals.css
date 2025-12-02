@@ -1,26 +1,257 @@
 @import "tailwindcss";
 
+
+/* Hide native scrollbar */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Enforce custom cursor globally */
+* {
+  cursor: none !important;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base Colors - Very Dark Background */
+  --background: #0a0a0f;
+  --foreground: #e4e4e7;
+
+  /* Primary Accent Colors */
+  --primary: #00d9ff;
+  --primary-glow: rgba(0, 217, 255, 0.5);
+
+  /* Neon Accent Colors */
+  --neon-blue: #00d9ff;
+  --neon-purple: #a855f7;
+  --neon-pink: #ec4899;
+  --neon-teal: #14b8a6;
+  --neon-orange: #f97316;
+
+  /* Skill Category Colors */
+  --skill-frontend: #00d9ff;
+  /* Cyan */
+  --skill-backend: #a855f7;
+  /* Purple */
+  --skill-tools: #f97316;
+  /* Orange */
+  --skill-design: #ec4899;
+  /* Pink */
+  --skill-other: #14b8a6;
+  /* Teal */
+
+  /* UI Colors */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(15, 15, 25, 0.8);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-primary: var(--primary);
+  --color-primary-glow: var(--primary-glow);
+
+  --color-neon-blue: var(--neon-blue);
+  --color-neon-purple: var(--neon-purple);
+  --color-neon-pink: var(--neon-pink);
+  --color-neon-teal: var(--neon-teal);
+  --color-neon-orange: var(--neon-orange);
+
+  --color-skill-frontend: var(--skill-frontend);
+  --color-skill-backend: var(--skill-backend);
+  --color-skill-tools: var(--skill-tools);
+  --color-skill-design: var(--skill-design);
+  --color-skill-other: var(--skill-other);
+
+  --color-glass: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-card: var(--card-bg);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-glitch: glitch 1s linear infinite;
+  --animate-spotlight: spotlight 2s ease .75s 1 forwards;
+  --animate-spin-slow: spin 8s linear infinite;
+
+  @keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: translate(-72%, -62%) scale(0.5);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -40%) scale(1);
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      opacity: 1;
+      filter: brightness(1.2) blur(0px);
+    }
+
+    50% {
+      opacity: 0.8;
+      filter: brightness(1.5) blur(2px);
+    }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(0, 217, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 0% 50%, rgba(168, 85, 247, 0.1), transparent 40%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+  position: relative;
+}
+
+/* Animated Grid Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(0, 217, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -1;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+}
+
+/* Floating Geometric Shapes */
+body::after {
+  content: '';
+  position: fixed;
+  top: 20%;
+  right: 10%;
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(168, 85, 247, 0.2);
+  border-radius: 50%;
+  z-index: -1;
+  animation: float 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
+}
+
+/* * {
+  cursor: none;
+} */
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Utility classes for glassmorphism */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.neon-text {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.neon-box {
+  box-shadow: 0 0 15px -3px currentColor;
 }

@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gravitic Juno - Futuristic Portfolio
 
-## Getting Started
+A high-performance, visually stunning personal portfolio built with Next.js, featuring a futuristic "Sci-Fi + Artistic Chaos" aesthetic.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-   **Futuristic UI/UX**: Glassmorphism, Neon accents, and Glitch effects.
+-   **3D Elements**: Integrated Spline 3D scenes for immersive visuals.
+-   **Advanced Animations**: Powered by Framer Motion for smooth transitions and scroll effects.
+-   **Admin Dashboard**: Secure CMS to manage Projects, Skills, Experience, and more.
+-   **Dynamic Content**:
+    -   **Projects**: Masonry layout with deterministic ordering.
+    -   **Skills**: Proficiency-based coloring (Green > 90%, etc.).
+    -   **Experience**: Timeline view.
+-   **Performance**: Optimized with Next.js App Router and Server Components.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **Animations**: [Framer Motion](https://www.framer.com/motion/)
+-   **3D**: [Spline](https://spline.design/)
+-   **Database**: [PostgreSQL](https://www.postgresql.org/) (via [Neon](https://neon.tech/))
+-   **ORM**: [Prisma](https://www.prisma.io/)
+-   **Icons**: [Lucide React](https://lucide.dev/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Installation
 
-## Learn More
+1.  **Clone the repository**:
+    ```bash
+    git clone <repository-url>
+    cd gravitic-juno
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3.  **Set up Environment Variables**:
+    Create a `.env` file in the root directory and add your database connection string and other secrets:
+    ```env
+    DATABASE_URL="postgresql://user:password@host/db"
+    ADMIN_PASSWORD="your-secure-password"
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4.  **Run Database Migrations**:
+    ```bash
+    npx prisma generate
+    npx prisma db push
+    ```
 
-## Deploy on Vercel
+5.  **Start the Development Server**:
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    Open [http://localhost:3000](http://localhost:3000) to view the site.
+    Access the Admin Dashboard at [http://localhost:3000/admin](http://localhost:3000/admin).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License.

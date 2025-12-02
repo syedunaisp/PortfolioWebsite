@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  imageUrl    String?
+  tags        String[] // Stored as array of strings
+  link        String?
+  githubLink  String?
+  featured    Boolean  @default(false)
+  isVisible   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id          String   @id @default(cuid())
+  name        String
+  category    String   // e.g., "Frontend", "Backend", "Tools"
+  proficiency Int      @default(0) // 0-100
+  icon        String?  // Lucide icon name or image URL
+  color       String?  @default("#00d9ff") // Default to Cyan
+  isVisible   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  role        String
+  company     String
+  period      String
+  description String
+  isVisible   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+  read      Boolean  @default(false)
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  degree      String
+  institution String
+  period      String
+  score       String
+  isVisible   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  date        String
+  award       String?
+  isVisible   Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Profile {
+  id              String   @id @default(cuid())
+  bio             String
+  careerObjective String
+  resumeUrl       String?
+  linkedinUrl     String?
+  githubUrl       String?
+  twitterUrl      String?
+  email           String?  // Public contact email
+  updatedAt       DateTime @updatedAt
+}
+
+model ResearchPaper {
+  id              String   @id @default(cuid())
+  title           String
+  abstract        String
+  link            String?
+  publicationDate String
+  isVisible       Boolean  @default(true)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+}
+
+model Certification {
+  id            String   @id @default(cuid())
+  name          String
+  issuer        String
+  date          String
+  credentialUrl String?
+  isVisible     Boolean  @default(true)
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model HeroSettings {
+  id         String   @id @default(cuid())
+  heading    String   @default("Welcome to the future")
+  subheading String?
+  keywords   String[] // Array of strings for the typing effect
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model SectionSettings {
+  id                 String   @id @default(cuid())
+  showAbout          Boolean  @default(true)
+  showSkills         Boolean  @default(true)
+  showProjects       Boolean  @default(true)
+  showExperience     Boolean  @default(true)
+  showEducation      Boolean  @default(true)
+  showAchievements   Boolean  @default(true)
+  showResearch       Boolean  @default(true)
+  showCertifications Boolean  @default(true)
+  updatedAt          DateTime @updatedAt
+}
