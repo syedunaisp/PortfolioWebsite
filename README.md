@@ -29,7 +29,7 @@ A high-performance, visually stunning personal portfolio built with Next.js, fea
 1.  **Clone the repository**:
     ```bash
     git clone <repository-url>
-    cd gravitic-juno
+    cd PortfolioWebsite
     ```
 
 2.  **Install dependencies**:
