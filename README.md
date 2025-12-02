@@ -1,4 +1,4 @@
-# Gravitic Juno - Futuristic Portfolio
+# Portfolio Website
 
 A high-performance, visually stunning personal portfolio built with Next.js, featuring a futuristic "Sci-Fi + Artistic Chaos" aesthetic.
 
