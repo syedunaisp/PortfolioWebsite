@@ -231,6 +231,7 @@ const skillSchema = z.object({
     category: z.string().min(1, 'Category is required'),
     proficiency: z.number().min(0).max(100),
     icon: z.string().optional(),
+    color: z.string().optional(),
 });
 
 export async function createSkill(prevState: any, formData: FormData) {
