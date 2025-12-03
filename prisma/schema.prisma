@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
   engineType = "binary"
 }
 
@@ -13,26 +13,26 @@ model Project {
   title       String
   description String
   imageUrl    String?
-  tags        String[] // Stored as array of strings
+  tags        String[]
   link        String?
   githubLink  String?
   featured    Boolean  @default(false)
-  isVisible   Boolean  @default(true)
-  order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  isVisible   Boolean  @default(true)
+  order       Int      @default(0)
 }
 
 model Skill {
   id          String   @id @default(cuid())
   name        String
-  category    String   // e.g., "Frontend", "Backend", "Tools"
-  proficiency Int      @default(0) // 0-100
-  icon        String?  // Lucide icon name or image URL
-  color       String?  @default("#00d9ff") // Default to Cyan
+  category    String
+  proficiency Int      @default(0)
+  icon        String?
+  createdAt   DateTime @default(now())
+  color       String?  @default("#00d9ff")
   isVisible   Boolean  @default(true)
   order       Int      @default(0)
-  createdAt   DateTime @default(now())
 }
 
 model Experience {
@@ -41,9 +41,9 @@ model Experience {
   company     String
   period      String
   description String
+  createdAt   DateTime @default(now())
   isVisible   Boolean  @default(true)
   order       Int      @default(0)
-  createdAt   DateTime @default(now())
 }
 
 model Message {
@@ -62,8 +62,8 @@ model Education {
   period      String
   score       String
   isVisible   Boolean  @default(true)
-  order       Int      @default(0)
   createdAt   DateTime @default(now())
+  order       Int      @default(0)
 }
 
 model Achievement {
@@ -73,8 +73,8 @@ model Achievement {
   date        String
   award       String?
   isVisible   Boolean  @default(true)
-  order       Int      @default(0)
   createdAt   DateTime @default(now())
+  order       Int      @default(0)
 }
 
 model Admin {
@@ -92,7 +92,7 @@ model Profile {
   linkedinUrl     String?
   githubUrl       String?
   twitterUrl      String?
-  email           String?  // Public contact email
+  email           String?
   updatedAt       DateTime @updatedAt
 }
 
@@ -103,8 +103,8 @@ model ResearchPaper {
   link            String?
   publicationDate String
   isVisible       Boolean  @default(true)
-  order           Int      @default(0)
   createdAt       DateTime @default(now())
+  order           Int      @default(0)
 }
 
 model Certification {
@@ -114,16 +114,16 @@ model Certification {
   date          String
   credentialUrl String?
   isVisible     Boolean  @default(true)
-  order         Int      @default(0)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  order         Int      @default(0)
 }
 
 model HeroSettings {
   id         String   @id @default(cuid())
   heading    String   @default("Welcome to the future")
   subheading String?
-  keywords   String[] // Array of strings for the typing effect
+  keywords   String[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
