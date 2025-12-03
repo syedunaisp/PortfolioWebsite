@@ -11,8 +11,16 @@ import { revalidatePath } from 'next/cache';
 export async function login(prevState: any, formData: FormData) {
     const password = formData.get('password');
 
+    // Debug logging
+    console.log('--- LOGIN ATTEMPT ---');
+    console.log('Password received:', !!password);
+    console.log('Password length:', password ? (password as string).length : 0);
+    console.log('Env Var ADMIN_PASSWORD set:', !!process.env.ADMIN_PASSWORD);
+    console.log('Expected password source:', process.env.ADMIN_PASSWORD ? 'Env Var' : 'Default');
+
     // Simple check against env var or hardcoded value
-    if (password === (process.env.ADMIN_PASSWORD || 'admin123')) {
+    const expectedPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    if (password === expectedPassword) {
         const user = { email: 'admin@example.com', name: 'Admin' };
 
         // Create the session
@@ -25,7 +33,8 @@ export async function login(prevState: any, formData: FormData) {
         redirect('/admin/dashboard');
     }
 
-    return { success: false, message: 'Invalid password' };
+    const debugInfo = `Recv: '${password}' (len=${(password as string)?.length}), Exp: ${process.env.ADMIN_PASSWORD ? 'Env' : 'Default'} (len=${expectedPassword.length})`;
+    return { success: false, message: `Invalid password. Debug: ${debugInfo}` };
 }
 
 export async function logout() {
