@@ -58,10 +58,4 @@ A high-performance, visually stunning personal portfolio built with Next.js, fea
     Open [http://localhost:3000](http://localhost:3000) to view the site.
     Access the Admin Dashboard at [http://localhost:3000/admin](http://localhost:3000/admin).
 
-## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the MIT License.
