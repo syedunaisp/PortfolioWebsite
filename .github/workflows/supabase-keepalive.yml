@@ -1,0 +1,58 @@
+name: Supabase Keep-Alive
+
+on:
+  schedule:
+    # Run every 6 hours at minute 17 past the hour (UTC)
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  keepalive:
+    name: Ping Keep-Alive Endpoint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Send keep-alive ping
+        env:
+          KEEPALIVE_URL: ${{ secrets.SUPABASE_KEEPALIVE_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$KEEPALIVE_URL" ]; then
+            echo "::error::Secret SUPABASE_KEEPALIVE_URL is not configured in GitHub repository secrets."
+            exit 1
+          fi
+
+          if [ -z "$CRON_SECRET" ]; then
+            echo "::error::Secret CRON_SECRET is not configured in GitHub repository secrets."
+            exit 1
+          fi
+
+          echo "Dispatching authenticated keep-alive request..."
+
+          HTTP_RESPONSE=$(curl -sS -X GET "$KEEPALIVE_URL" \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            -H "User-Agent: GitHub-Actions-Supabase-KeepAlive" \
+            --connect-timeout 10 \
+            --max-time 30 \
+            -w "\n%{http_code}")
+
+          HTTP_STATUS=$(echo "$HTTP_RESPONSE" | tail -n1)
+          RESPONSE_BODY=$(echo "$HTTP_RESPONSE" | sed '$d')
+
+          echo "HTTP Status Code: $HTTP_STATUS"
+
+          if [ "$HTTP_STATUS" -eq 200 ]; then
+            echo "Keep-alive ping succeeded. Supabase is active."
+          elif [ "$HTTP_STATUS" -eq 401 ]; then
+            echo "::error::Request returned 401 Unauthorized. Ensure GitHub CRON_SECRET matches Vercel CRON_SECRET."
+            exit 1
+          elif [ "$HTTP_STATUS" -eq 503 ]; then
+            echo "::error::Request returned 503 Service Unavailable. Supabase may be paused or unreachable."
+            exit 1
+          else
+            echo "::error::Keep-alive request failed with unexpected HTTP status $HTTP_STATUS."
+            exit 1
+          fi
