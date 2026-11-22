@@ -6,7 +6,7 @@ import nodemailer from 'nodemailer';
 import { cookies } from 'next/headers';
 import { encrypt } from '@/lib/auth';
 import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function login(prevState: any, formData: FormData) {
     const password = formData.get('password');
@@ -170,6 +170,7 @@ export async function createProject(prevState: any, formData: FormData) {
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-projects', 'max');
         return { success: true, message: 'Project created successfully!' };
     } catch (error) {
         console.error('Create project error:', error);
@@ -214,6 +215,7 @@ export async function updateProject(id: string, prevState: any, formData: FormDa
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-projects', 'max');
         return { success: true, message: 'Project updated successfully!' };
     } catch (error) {
         console.error('Update project error:', error);
@@ -226,6 +228,7 @@ export async function deleteProject(id: string) {
         await prisma.project.delete({ where: { id } });
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-projects', 'max');
         return { success: true };
     } catch (error) {
         console.error('Delete project error:', error);
@@ -273,6 +276,7 @@ export async function createSkill(prevState: any, formData: FormData) {
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-skills', 'max');
         return { success: true, message: 'Skill created successfully!' };
     } catch (error) {
         console.error('Create skill error:', error);
@@ -311,6 +315,7 @@ export async function updateSkill(id: string, prevState: any, formData: FormData
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-skills', 'max');
         return { success: true, message: 'Skill updated successfully!' };
     } catch (error) {
         console.error('Update skill error:', error);
@@ -323,6 +328,7 @@ export async function deleteSkill(id: string) {
         await prisma.skill.delete({ where: { id } });
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-skills', 'max');
         return { success: true };
     } catch (error) {
         console.error('Delete skill error:', error);
@@ -361,6 +367,7 @@ export async function createExperience(prevState: any, formData: FormData) {
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-experiences', 'max');
         return { success: true, message: 'Experience created successfully!' };
     } catch (error) {
         console.error('Create experience error:', error);
@@ -391,6 +398,7 @@ export async function updateExperience(id: string, prevState: any, formData: For
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-experiences', 'max');
         return { success: true, message: 'Experience updated successfully!' };
     } catch (error) {
         console.error('Update experience error:', error);
@@ -403,6 +411,7 @@ export async function deleteExperience(id: string) {
         await prisma.experience.delete({ where: { id } });
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-experiences', 'max');
         return { success: true };
     } catch (error) {
         console.error('Delete experience error:', error);
@@ -468,6 +477,7 @@ export async function createEducation(prevState: any, formData: FormData) {
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-education', 'max');
         return { success: true, message: 'Education created successfully!' };
     } catch (error) {
         console.error('Create education error:', error);
@@ -498,6 +508,7 @@ export async function updateEducation(id: string, prevState: any, formData: Form
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-education', 'max');
         return { success: true, message: 'Education updated successfully!' };
     } catch (error) {
         console.error('Update education error:', error);
@@ -510,6 +521,7 @@ export async function deleteEducation(id: string) {
         await prisma.education.delete({ where: { id } });
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-education', 'max');
         return { success: true };
     } catch (error) {
         console.error('Delete education error:', error);
@@ -551,6 +563,7 @@ export async function createAchievement(prevState: any, formData: FormData) {
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-achievements', 'max');
         return { success: true, message: 'Achievement created successfully!' };
     } catch (error) {
         console.error('Create achievement error:', error);
@@ -584,6 +597,7 @@ export async function updateAchievement(id: string, prevState: any, formData: Fo
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-achievements', 'max');
         return { success: true, message: 'Achievement updated successfully!' };
     } catch (error) {
         console.error('Update achievement error:', error);
@@ -596,6 +610,7 @@ export async function deleteAchievement(id: string) {
         await prisma.achievement.delete({ where: { id } });
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-achievements', 'max');
         return { success: true };
     } catch (error) {
         console.error('Delete achievement error:', error);
@@ -650,6 +665,7 @@ export async function updateProfile(prevState: any, formData: FormData) {
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-profile', 'max');
         return { success: true, message: 'Profile updated successfully!' };
     } catch (error) {
         console.error('Update profile error:', error);
@@ -688,6 +704,7 @@ export async function createResearch(prevState: any, formData: FormData) {
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-research', 'max');
         return { success: true, message: 'Research paper added successfully!' };
     } catch (error) {
         console.error('Create research error:', error);
@@ -718,6 +735,7 @@ export async function updateResearch(id: string, prevState: any, formData: FormD
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-research', 'max');
         return { success: true, message: 'Research paper updated successfully!' };
     } catch (error) {
         console.error('Update research error:', error);
@@ -730,6 +748,7 @@ export async function deleteResearch(id: string) {
         await prisma.researchPaper.delete({ where: { id } });
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-research', 'max');
         return { success: true };
     } catch (error) {
         console.error('Delete research error:', error);
@@ -768,6 +787,7 @@ export async function createCertification(prevState: any, formData: FormData) {
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-certifications', 'max');
         return { success: true, message: 'Certification added successfully!' };
     } catch (error) {
         console.error('Create certification error:', error);
@@ -798,6 +818,7 @@ export async function updateCertification(id: string, prevState: any, formData: 
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-certifications', 'max');
         return { success: true, message: 'Certification updated successfully!' };
     } catch (error) {
         console.error('Update certification error:', error);
@@ -810,6 +831,7 @@ export async function deleteCertification(id: string) {
         await prisma.certification.delete({ where: { id } });
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-certifications', 'max');
         return { success: true };
     } catch (error) {
         console.error('Delete certification error:', error);
@@ -864,6 +886,7 @@ export async function updateHeroSettings(prevState: any, formData: FormData) {
 
         revalidatePath('/admin/dashboard');
         revalidatePath('/');
+        revalidateTag('portfolio-hero', 'max');
         return { success: true, message: 'Hero settings updated successfully!' };
     } catch (error) {
         console.error('Update hero settings error:', error);
