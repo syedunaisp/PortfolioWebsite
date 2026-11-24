@@ -85,6 +85,9 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   category: "technology",
+  verification: {
+    google: "61BUEKnBGKUrIZYmVArKKe2Vdxf4B9kQi83lqDXqLXo",
+  },
 };
 
 import { AIHudCursor } from "@/components/ui/AIHudCursor";
