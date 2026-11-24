@@ -72,9 +72,16 @@ export default function Hero({ heroSettings, className }: HeroProps) {
                 </motion.div>
 
                 <h1 className="text-5xl md:text-8xl font-bold mb-6 tracking-tighter">
-                    <span className="text-foreground">I am </span>
+                    {/* Visually hidden full name for search engines and screen readers */}
+                    <span className="sr-only">Syed Unais Panjathan — </span>
+                    <span className="text-foreground" aria-hidden="true">I am </span>
                     <GlitchText text="Unais" className="text-neon-blue" />
                 </h1>
+
+                {/* Visually hidden subtitle for SEO — full professional identity */}
+                <p className="sr-only">
+                    AI Engineer, Machine Learning Developer, and Generative AI specialist based in Hyderabad, India.
+                </p>
 
                 <div className="h-12 md:h-16 overflow-hidden relative w-full flex justify-center items-center">
                     <AnimatePresence mode="wait">

@@ -31,7 +31,7 @@ export default function ProjectCard({ project }: { project: ProjectProps }) {
                     {project.imageUrl ? (
                         <Image
                             src={project.imageUrl}
-                            alt={project.title}
+                            alt={`Screenshot of ${project.title} — a project by Syed Unais Panjathan`}
                             fill
                             className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
